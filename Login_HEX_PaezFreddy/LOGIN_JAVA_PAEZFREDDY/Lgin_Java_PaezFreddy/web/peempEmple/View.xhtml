@@ -1,0 +1,94 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+
+
+    <h:form enctype="multipart/form-data" id="formViewUsuario">
+
+        <p:dialog header="Ver Usuario" widgetVar="digViewAcceso" modal="true" height="100%" style="font-size: 14px" id="digViewAcceso">
+            <p:panelGrid columns="2" style="width: 100%">
+                <h:panelGrid columns="2" cellpadding="7px">
+                    <h:outputLabel value="Nombre:" for="peempNombre" />
+                    <h:outputLabel id="peempNombre" value="#{peempEmpleController.selected.peempNombre}" title="#{bundle.CreatePeempEmpleTitle_peempNombre}" />
+                    <h:outputLabel value="Apellido Paterno:" for="peempApellpaterno" />
+                    <h:outputLabel id="peempApellpaterno" value="#{peempEmpleController.selected.peempApellpaterno}" title="#{bundle.CreatePeempEmpleTitle_peempApellpaterno}" />
+                    <h:outputLabel value="Apellido Materno:" for="peempApellmaterno" />
+                    <h:outputLabel id="peempApellmaterno" value="#{peempEmpleController.selected.peempApellmaterno}" title="#{bundle.CreatePeempEmpleTitle_peempApellmaterno}" />
+                    <h:outputLabel value="Cédula:" for="peempCedula" />
+                    <h:outputLabel id="peempCedula" value="#{peempEmpleController.selected.peempCedula}" title="#{bundle.CreatePeempEmpleTitle_peempCedula}" />
+                </h:panelGrid>
+
+                <p:panelGrid columns="1" rendered="#{peempEmpleController.selected != null}" id="Image" style="text-align: center" >
+
+                    <p:graphicImage name="/img/#{peempEmpleController.selected.peempFoto}"  width="100px" height="100px" rendered="#{peempEmpleController.selected.peempFoto ne 'NULL' }" />
+
+                </p:panelGrid>
+
+            </p:panelGrid>
+            <h:panelGrid columns="1" style="width: 100%">
+                <p:tabView>
+                    <p:tab title="Información Personal">
+                        <h:panelGrid columns="2" border="0" cellpadding="5px">
+                            <h:outputLabel value="Sexo:" for="pesexCodigo" />
+                            <h:outputLabel id="pesexCodigo" value="#{peempEmpleController.selected.pesexCodigo.pesexNomb}" title="#{bundle.CreatePeempEmpleTitle_pesexCodigo}" />
+                            
+                            <h:outputLabel value="Género:" for="codgenero" />
+                            <h:outputLabel id="codgenero" value="#{peempEmpleController.selected.codgenero.descripcion}" title="#{bundle.CreatePeempEmpleTitle_codgenero}" />
+       
+                            <h:outputLabel value="Fecha de Nacimiento:" for="peempFecnac" />
+                            <h:outputLabel id="peempFecnac" value="#{peempEmpleController.selected.peempFecnacimiento}" title="#{bundle.CreatePeempEmpleTitle_peempFecnacimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputLabel>
+                              
+                            
+                            <h:outputLabel value="Estado Civil:" for="peescCodigo" />
+                            <h:outputLabel id="peescCodigo" value="#{peempEmpleController.selected.peescCodigo.peescNomb}" title="#{bundle.CreatePeempEmpleTitle_peescCodigo}" />
+                               
+                            <h:outputLabel value="Nacionalidad:" for="codignac" />
+                            <h:outputLabel id="codignac" value="#{peempEmpleController.selected.codnacion.descrinac}" title="#{bundle.CreatePeempEmpleTitle_codnacion}" />
+                                
+                        </h:panelGrid>
+                    </p:tab>
+
+                    <p:tab title="Información de Contacto">
+                        <h:panelGrid columns="2" border="0" cellpadding="5px">
+                            <h:outputLabel value="Teléfono: " for="peempTelefono" />
+                            <h:outputLabel id="peempTelefono" value="#{peempEmpleController.selected.peempTelefono}" title="#{bundle.CreatePeempEmpleTitle_peempTelefono}"/>
+                            
+                            <h:outputLabel value="Email: " for="peempEmail" />
+                            <h:outputLabel id="peempEmail" value="#{peempEmpleController.selected.peempEmail}" title="#{bundle.CreatePeempEmpleTitle_peempEmail}"/>
+                            
+                            <h6>Dirección</h6>
+                            <h:outputLabel value="" />
+                            
+                            <h:outputLabel value="Calle Principal: " for="pedirCalleprincipal" />
+                            <h:outputLabel id="pedirCalleprincipal" value="#{peempEmpleController.selected.pedirCodigodireccion.pedirCalleprincipal}" title="#{bundle.CreatePeempEmpleTitle_pedirCalleprincipal}"/>
+                            
+                            <h:outputLabel value="Calle Secundaria: " for="pedirCallesecundaria" />
+                            <h:outputLabel id="pedirCallesecundaria" value="#{peempEmpleController.selected.pedirCodigodireccion.pedirCallesecundaria}" title="#{bundle.CreatePeempEmpleTitle_pedirCallesecundaria}"/>                            <h:outputLabel value="Teléfono:" for="peempTelef" />
+                        </h:panelGrid>
+                    </p:tab>
+
+                    <p:tab title="Información Laboral">
+                        <h:panelGrid columns="2" cellpadding="5px">
+
+                            <h:outputLabel value="Salario:" for="peempSalario" />
+                            <h:outputLabel id="peempSalario" value="$#{peempEmpleController.selected.peempSalario}" title="#{bundle.CreatePeempEmpleTitle_peempSalario}" />
+                            <h:outputLabel value="Departamento:" for="coddepart" />
+                            <h:outputLabel id="coddepart" value="#{peempEmpleController.selected.coddepart.nombredepto}" title="#{bundle.CreatePeempEmpleTitle_coddepart}" />
+                        </h:panelGrid>
+                    </p:tab>
+                </p:tabView>
+                
+            </h:panelGrid>
+
+        </p:dialog>
+
+    </h:form>
+
+</ui:composition>
+

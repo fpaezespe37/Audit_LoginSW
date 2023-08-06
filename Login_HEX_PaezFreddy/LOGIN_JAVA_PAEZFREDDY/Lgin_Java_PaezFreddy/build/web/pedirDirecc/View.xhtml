@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PedirDireccViewDlg" widgetVar="PedirDireccViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPedirDireccTitle}">
+            <h:form id="PedirDireccViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pedirDireccController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPedirDireccLabel_pedirCodigodireccion}"/>
+                        <h:outputText value="#{pedirDireccController.selected.pedirCodigodireccion}" title="#{bundle.ViewPedirDireccTitle_pedirCodigodireccion}"/>
+                        <h:outputText value="#{bundle.ViewPedirDireccLabel_pedirCalleprincipal}"/>
+                        <h:outputText value="#{pedirDireccController.selected.pedirCalleprincipal}" title="#{bundle.ViewPedirDireccTitle_pedirCalleprincipal}"/>
+                        <h:outputText value="#{bundle.ViewPedirDireccLabel_pedirCallesecundaria}"/>
+                        <h:outputText value="#{pedirDireccController.selected.pedirCallesecundaria}" title="#{bundle.ViewPedirDireccTitle_pedirCallesecundaria}"/>
+                        <h:outputText value="#{bundle.ViewPedirDireccLabel_peparParroq}"/>
+                        <h:outputText value="#{pedirDireccController.selected.peparParroq}" title="#{bundle.ViewPedirDireccTitle_peparParroq}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PedirDireccViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+             <ui:include src="/WEB-INF/jsfFragment/menu.xhtml" />
+        </ui:define>
+        <ui:define name="body">
+            <p:growl id="growl" showDetail="true" life="3000" />
+            <center>
+                <p:panel header="Editar Perfil" style="width: 50%">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Código" for="xeperCodigo" />
+                    <p:inputText id="xeperCodigo" value="#{xeperPerfiController.selected.xeperCodigo}" title="#{bundle.EditXeperPerfiTitle_xeperCodigo}" required="true" requiredMessage="#{bundle.EditXeperPerfiRequiredMessage_xeperCodigo}"/>
+                    <p:outputLabel value="Descripción" for="xeperDescri" />
+                    <p:inputText id="xeperDescri" value="#{xeperPerfiController.selected.xeperDescri}" title="#{bundle.EditXeperPerfiTitle_xeperDescri}" required="true" requiredMessage="#{bundle.EditXeperPerfiRequiredMessage_xeperDescri}"/>
+                    <p:outputLabel value="Observación" for="xeperObser" />
+                    <p:inputTextarea rows="4" cols="30" id="xeperObser" value="#{xeperPerfiController.selected.xeperObser}" title="#{bundle.EditXeperPerfiTitle_xeperObser}" />
+                </h:panelGrid>
+                <h:commandLink action="#{xeperPerfiController.update}" value="Guardar"/>
+                <br />
+                <br />
+                <h:commandLink action="#{xeperPerfiController.prepareList}" value="Lista de Perfiles" immediate="true"/>
+
+            </h:form>
+                </p:panel>
+            </center>
+        </ui:define>
+    </ui:composition>
+
+</html>

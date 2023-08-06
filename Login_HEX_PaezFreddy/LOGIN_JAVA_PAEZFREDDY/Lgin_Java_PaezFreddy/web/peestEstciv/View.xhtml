@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PeestEstcivViewDlg" widgetVar="PeestEstcivViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPeestEstcivTitle}">
+            <h:form id="PeestEstcivViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{peestEstcivController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPeestEstcivLabel_peescCodigo}"/>
+                        <h:outputText value="#{peestEstcivController.selected.peescCodigo}" title="#{bundle.ViewPeestEstcivTitle_peescCodigo}"/>
+                        <h:outputText value="#{bundle.ViewPeestEstcivLabel_peescNomb}"/>
+                        <h:outputText value="#{peestEstcivController.selected.peescNomb}" title="#{bundle.ViewPeestEstcivTitle_peescNomb}"/>
+                        <h:outputText value="#{bundle.ViewPeestEstcivLabel_peescDescri}"/>
+                        <h:outputText value="#{peestEstcivController.selected.peescDescri}" title="#{bundle.ViewPeestEstcivTitle_peescDescri}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PeestEstcivViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

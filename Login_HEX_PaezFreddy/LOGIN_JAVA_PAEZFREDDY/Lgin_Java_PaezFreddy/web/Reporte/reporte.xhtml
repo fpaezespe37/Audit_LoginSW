@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="title">
+                <ui:include src="/WEB-INF/jsfFragment/menu.xhtml" />
+
+            </ui:define>
+            <ui:define name="body">
+                <center>
+                    <h3 class="my-4">Reporte de Personal</h3>
+                
+                <h:panelGroup id="messagePanel" layout="block">
+
+                </h:panelGroup>
+
+
+                <h:form id="formAcceso" style="width: 85%">
+                    <center>
+                        <p:selectOneMenu id="cboFiltro" value="#{peempEmpleController.opcFiltro}">
+                            <f:selectItem itemLabel="Seleccione un filtro" itemValue="0" noSelectionOption="true"></f:selectItem>
+                            <f:selectItem itemLabel="Filtrar por Sexo" itemValue="1"></f:selectItem>
+                            <f:selectItem itemLabel="Filtrar por Departamentos" itemValue="2"></f:selectItem>
+                            <f:selectItem itemLabel="Filtrar por Ubicación" itemValue="3"></f:selectItem>
+                            <f:selectItem itemLabel="Filtrar por Fecha" itemValue="4"></f:selectItem>
+                            <p:ajax event="change" update="cboGenero cboDepartamentos cboPais cboFecha"/>  
+                        </p:selectOneMenu>
+                        <h:panelGroup id="cboGenero" layout="block" style="margin-top: 10px;">
+
+                            <p:selectOneMenu value="#{peempEmpleController.idGenero}" rendered="#{peempEmpleController.opcFiltro eq '1'}">
+                                <f:selectItem itemLabel="Seleccione un sexo" itemValue="0" noSelectionOption="true"></f:selectItem>
+                                <f:selectItem itemLabel="Masculino" itemValue="1"></f:selectItem>
+                                <f:selectItem itemLabel="Femenino" itemValue="2"></f:selectItem>
+                                <p:ajax event="change" listener="#{peempEmpleController.obtenerEmpleadosGeneros()}" update="tablaAccesos"/>
+                            </p:selectOneMenu>
+                        </h:panelGroup>
+                        <h:panelGroup id="cboDepartamentos" layout="block" style="margin-top: 10px;">
+                            <p:selectOneMenu  value="#{peempEmpleController.codDepartamento}" rendered="#{peempEmpleController.opcFiltro eq '2'}">
+                                <f:selectItem itemLabel="Seleccione un Departamento" itemValue="0" noSelectionOption="true"></f:selectItem>
+                                <f:selectItems value="#{tedepDepartController.listDepartamentos}" var="dep" itemLabel="#{dep.nombredepto}" itemValue="#{dep.coddepart}"/>
+                                <p:ajax event="change" listener="#{peempEmpleController.obtenerEmpleadosDepartamentos()}" update="tablaAccesos"/>
+                            </p:selectOneMenu>
+                        </h:panelGroup>
+                        <h:panelGroup id="cboPais" layout="block">
+                            <p:selectOneMenu  value="#{peempEmpleController.codPais}" rendered="#{peempEmpleController.opcFiltro eq '3'}" style="display: block;width:250px;margin-top: 10px;">
+                                <f:selectItem itemLabel="Seleccione un País" itemValue="0" noSelectionOption="true"></f:selectItem>
+                                <f:selectItems value="#{peempEmpleController.listPaises}" var="pais" itemLabel="#{pais.pepaiDescri}" itemValue="#{pais.pepaiCodigo}" />
+                                <p:ajax event="change" listener="#{peempEmpleController.obtenerProvincias()}" update="cboProvin cboCanton cboParroq"/>
+                                <p:ajax event="change" listener="#{peempEmpleController.obtenerEmpleadosPais()}" update="tablaAccesos"/>
+                            </p:selectOneMenu>
+                            <p:selectOneMenu id="cboProvin" value="#{peempEmpleController.codProvin}" rendered="#{peempEmpleController.opcFiltro eq '3'}" style="display: block;width:250px;margin-top: 10px;">
+                                <f:selectItem itemLabel="Seleccione una Provincia" itemValue="0" noSelectionOption="true"></f:selectItem>
+                                <f:selectItems value="#{peempEmpleController.listProvin}" var="prov" itemLabel="#{prov.peproNombre}" itemValue="#{prov.peproProvinPK.peproCodigo}"/>
+                                <p:ajax event="change" listener="#{peempEmpleController.obtenerCantones()}" update="cboCanton cboParroq"/>
+                                <p:ajax event="change" listener="#{peempEmpleController.obtenerEmpleadosProvin()}" update="tablaAccesos"/>
+                            </p:selectOneMenu>
+                            <p:selectOneMenu id="cboCanton" value="#{peempEmpleController.codCanton}" rendered="#{peempEmpleController.opcFiltro eq '3'}" style="display: block;width:250px;margin-top: 10px;">
+                                <f:selectItem itemLabel="Seleccione un Cantón" itemValue="0" noSelectionOption="true"></f:selectItem>
+                                <f:selectItems value="#{peempEmpleController.listCanton}" var="cant" itemLabel="#{cant.pecanDescri}" itemValue="#{cant.pecanCantonPK.pecanCodigo}"/>
+                                <p:ajax event="change" listener="#{peempEmpleController.obtenerParroquias()}" update="cboParroq"/>
+                                <p:ajax event="change" listener="#{peempEmpleController.obtenerEmpleadosCanton()}" update="tablaAccesos"/>
+                            </p:selectOneMenu>
+                            <p:selectOneMenu id="cboParroq" value="#{peempEmpleController.codParroquia}" rendered="#{peempEmpleController.opcFiltro eq '3'}" style="display: block;width:250px;margin-top: 10px;">
+                                <f:selectItem itemLabel="Seleccione una Parroquia" itemValue="0" noSelectionOption="true"></f:selectItem>
+                                <f:selectItems value="#{peempEmpleController.listParroquias}" var="parr" itemLabel="#{parr.peparDescri}" itemValue="#{parr.peparParroqPK.peparCodigo}"/>
+                                <p:ajax event="change" listener="#{peempEmpleController.obtenerEmpleadosDepartamentos()}" update="tablaAccesos"/>
+                                <p:ajax event="change" listener="#{peempEmpleController.obtenerEmpleadosParroq()}" update="tablaAccesos"/>
+                            </p:selectOneMenu>
+                        </h:panelGroup>
+
+                        <h:panelGroup id="cboFecha" layout="block" style="margin-top: 10px;">
+                            <p:calendar id="peempFecnac" value="#{peempEmpleController.fechaFiltro}" showOn="button" navigator="true" rendered="#{peempEmpleController.opcFiltro eq '4'}" >
+                                <f:convertDateTime pattern="dd/MM/yy" />
+                                <p:ajax event="dateSelect" listener="#{peempEmpleController.obtenerEmpleadosFechas()}" update="tablaAccesos"/>
+                            </p:calendar>
+                        </h:panelGroup>
+
+                        <p:growl id="growl" showDetail="true" life="3000" />
+
+
+                    </center>
+
+                    <p:dataTable id="tablaAccesos" var="item" style="padding-left: 25px; padding-right: 25px; padding-top: 10px;padding-bottom: 32px; font-size: 12px " value="#{peempEmpleController.empleadoList}"
+                                 widgetVar="tablaAccesos" emptyMessage="No hay datos bajo ese criterio" filteredValue="" editable="true" paginator="true" rows="10">
+
+                        <p:column  headerText="Nombre y Apellido" filterBy="#{item.peempNombre} #{item.peempApellpaterno} #{item.peempApellmaterno}" filterMatchMode="contains" >
+                                <h:outputText value="#{item.peempNombre} #{item.peempApellpaterno} #{item.peempApellmaterno}"/>
+                        </p:column>
+
+                        <p:column  headerText="Cédula" filterMatchMode="contains">
+                                <h:outputText value="#{item.peempCedula}"/>
+                        </p:column>
+
+                        <p:column  headerText="Sexo" filterMatchMode="contains">
+                                <h:outputText value="#{item.pesexCodigo.pesexNomb}"/>
+                        </p:column>
+                        
+                        <p:column  headerText="Email" filterMatchMode="contains">
+                                <h:outputText value="#{item.peempEmail}"/>
+                        </p:column>
+
+                        <p:column  headerText="Fecha Nacimiento" filterMatchMode="contains">
+                                <h:outputText value="#{item.peempFecnacimiento}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                        </p:column>
+
+                        <p:column  headerText="Departamento" filterMatchMode="contains">
+                                <h:outputText value="#{item.coddepart.nombredepto}"/>
+                        </p:column>
+
+                        <p:column  headerText="Salario" filterMatchMode="contains">
+                                <h:outputText value="$#{item.peempSalario}"/>
+                        </p:column>
+
+
+
+                    </p:dataTable>
+
+
+
+                    <!-- DIALOG CONFIRMACION -->
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="350">
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" />
+                    </p:confirmDialog>
+
+                </h:form>
+
+                </center> 
+            </ui:define>
+        </ui:composition>
+
+    </body>
+
+</html>

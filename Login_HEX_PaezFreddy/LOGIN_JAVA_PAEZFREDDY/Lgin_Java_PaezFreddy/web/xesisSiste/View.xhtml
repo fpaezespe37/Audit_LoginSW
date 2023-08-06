@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="XesisSisteViewDlg" widgetVar="XesisSisteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewXesisSisteTitle}">
+            <h:form id="XesisSisteViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{xesisSisteController.selected != null}">
+                        <h:outputText value="#{bundle.ViewXesisSisteLabel_xesisCodigo}"/>
+                        <h:outputText value="#{xesisSisteController.selected.xesisCodigo}" title="#{bundle.ViewXesisSisteTitle_xesisCodigo}"/>
+                        <h:outputText value="#{bundle.ViewXesisSisteLabel_xesisDescri}"/>
+                        <h:outputText value="#{xesisSisteController.selected.xesisDescri}" title="#{bundle.ViewXesisSisteTitle_xesisDescri}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="XesisSisteViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <ui:include src="/WEB-INF/jsfFragment/menu.xhtml" />
+        </ui:define>
+        <ui:define name="body">
+            <center>
+                <p:panel header="Ver Sistema" style="width: 50%">
+                    <h:form>
+                        <p:panelGrid columns="2">
+                            <h:outputText value="Código:"/>
+                            <h:outputText value="#{xesisSisteController.selected.xesisCodigo}" title="#{bundle.ViewXesisSisteTitle_xesisCodigo}"/>
+                            <h:outputText value="Descripción:"/>
+                            <h:outputText value="#{xesisSisteController.selected.xesisDescri}" title="#{bundle.ViewXesisSisteTitle_xesisDescri}"/>
+                        </p:panelGrid>
+                        <br />
+                        <br />
+                        <h:commandLink action="#{xesisSisteController.prepareList}" value="Lista de Sistemas"/>
+                    </h:form>
+                </p:panel>
+            </center>
+        </ui:define>
+    </ui:composition>
+
+</html>

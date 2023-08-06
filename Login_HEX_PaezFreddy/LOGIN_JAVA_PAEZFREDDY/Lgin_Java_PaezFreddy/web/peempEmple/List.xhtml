@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <link rel="shortcut icon" href="#"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+        <link rel="stylesheet" href="style.css"/>
+        <script type="text/javascript" src="https://kit.fontawesome.com/832497f32a.js"/>
+
+    </h:head>
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <ui:include src="/WEB-INF/jsfFragment/menu.xhtml" />
+
+        </ui:define>
+        <ui:define name="body">
+
+            <center>
+                <h3 class="mt-3">Usuarios</h3>
+
+                <h:panelGroup id="messagePanel" layout="block">
+
+                </h:panelGroup>
+
+
+                <h:form id="formAcceso" style="width: 85%">
+                    <center>
+
+                        <p:growl id="growl" showDetail="true" life="3000" />
+
+                    </center>
+                    <p:spacer height="3px"/>
+
+                    <p:dataTable id="tablaAccesos" var="item" style="padding-left: 25px; padding-right: 25px; padding-top: 10px;padding-bottom: 32px; font-size: 12px " value="#{peempEmpleController.items}"
+                                 widgetVar="tablaAccesos" emptyMessage="No hay acceso bajo ese criterio" filteredValue="" editable="true" paginator="true" rows="10">
+
+                        <f:facet name="header">
+                            <center>
+                                <p:commandButton value="Crear" icon="pi pi-plus" oncomplete="PF('dlg2').show();" actionListener="#{peempEmpleController.inicializarEmpleado}"/>
+
+                            </center>
+                        </f:facet>
+
+                        <p:column  headerText="Código" filterMatchMode="contains">
+                            <center>
+                                <h:outputText value="#{item.peempCurp}"/>
+                            </center>
+
+                        </p:column>
+                        <p:column  headerText="Cédula" filterMatchMode="contains">
+                            <center>
+                                <h:outputText value="#{item.peempCedula}"/>
+                            </center>
+                        </p:column>
+
+                        <p:column  headerText="Nombre y Apellido" filterMatchMode="contains">
+                            <center>
+                                <h:outputText value="#{item.peempNombre} #{item.peempApellpaterno} #{item.peempApellmaterno}"/>
+                            </center>
+                        </p:column>
+
+                        <p:column  headerText="Email" filterMatchMode="contains">
+                            <center>
+                                <h:outputText value="#{item.peempEmail}"/>
+                            </center>
+                        </p:column>
+
+                        <p:column  headerText="Salario" filterMatchMode="contains">
+                            <center>
+                                <h:outputText value="#{item.peempSalario}"/>
+                            </center>
+                        </p:column>
+
+                        <p:column style="width: 130px" headerText="Acciones" exportable="false">
+                            <f:facet name="header">
+                                <h:outputText value="Acciones"/>
+                            </f:facet>
+                            <center>
+                                <p:commandButton update=":formViewUsuario:digViewAcceso" icon="pi pi-eye" process="@this" oncomplete="PF('digViewAcceso').show();" actionListener="#{peempEmpleController.prepareView}" style="margin: 2px" class="bg-success text-white"/>
+
+                                <p:commandButton update=":formEditarUsuario:digEditarAcceso" actionListener="#{peempEmpleController.prepareEdit}" process="@this" icon="pi pi-pencil" oncomplete ="PF('digEditarAcceso').show();" style="margin: 2px">
+
+                                </p:commandButton>
+                                <p:commandButton icon="pi pi-trash" process="@this" title="Eliminar acceso"
+                                                 action="#{peempEmpleController.destroy}" update="tablaAccesos" style="margin: 2px" class="bg-danger text-white" >
+                                    <p:confirm header="Confirmación" message="¿Está seguro que desea eliminar a este usuario? " icon="ui-icon-alert"/>
+                                </p:commandButton>
+                            </center>
+
+                        </p:column>
+
+                    </p:dataTable>
+
+
+
+                    <!-- DIALOG CONFIRMACION -->
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="350">
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" />
+                    </p:confirmDialog>
+
+                </h:form>
+
+                <!-- CREAR USUARIO -->
+
+                <ui:include src="Create.xhtml" />
+
+                <!-- EDITAR USUARIO -->
+                <ui:include src="Edit.xhtml" />
+
+                <!-- Ver USUARIO -->
+                <ui:include src="View.xhtml" />
+            </center> 
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,118 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+
+
+    <h:form enctype="multipart/form-data" id="formEditarUsuario">
+
+        <p:dialog header="Editar Usuario" widgetVar="digEditarAcceso" modal="true"  style="font-size: 14px" id="digEditarAcceso" width="55%" height="75vh">
+            <p:panelGrid columns="2">
+                <h:panelGrid columns="2" cellpadding="5px">
+                    <h:outputLabel value="Código:*" for="peempCurp" />
+                    <h:inputText id="peempCurp" value="#{peempEmpleController.selected.peempCurp}" title="#{bundle.CreatePeempEmpleTitle_peempCurp}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_peempCurp}" readonly="true"/>
+                    <h:outputLabel value="Cédula:*" for="peempCedula" />
+                    <h:inputText id="peempCedula" value="#{peempEmpleController.selected.peempCedula}" title="#{bundle.CreatePeempEmpleTitle_peempCedula}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_peempCedula}" readonly="true"/>
+                    <h:outputLabel value="Nombre:*" for="peempNombre" />
+                    <h:inputText id="peempNombre" value="#{peempEmpleController.selected.peempNombre}" title="#{bundle.CreatePeempEmpleTitle_peempNombre}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_peempNombre}"/>
+                    <h:outputLabel value="Apellido Paterno:*" for="peempApellpaterno" />
+                    <h:inputText id="peempApellpaterno" value="#{peempEmpleController.selected.peempApellpaterno}" title="#{bundle.CreatePeempEmpleTitle_peempApellpaterno}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_peempApellpaterno}"/>
+                    <h:outputLabel value="Apellido Materno*" for="peempApellmaterno" />
+                    <h:inputText id="peempApellmaterno" value="#{peempEmpleController.selected.peempApellmaterno}" title="#{bundle.CreatePeempEmpleTitle_peempApellmaterno}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_peempApellmaterno}"/>
+
+                </h:panelGrid>
+
+
+                <p:panelGrid columns="2" rendered="#{peempEmpleController.selected != null}" id="Image" styleClass="ui-noborder" >
+
+                    <p:graphicImage name="/img/#{peempEmpleController.selected.peempFoto}"  width="100px" height="100px" rendered="#{peempEmpleController.foto == null}" cache="false"/>
+                    <p:graphicImage id="imagePreview" value="#{peempEmpleController.imagepreview}" cache="false" style="width: 100px;" rendered="#{peempEmpleController.foto != null}"/>
+                    <p:fileUpload sizeLimit="1048500" listener="#{peempEmpleController.preview}" mode="advanced" skinSimple="true" auto="true" update="Image"/>
+                    <p:inputText id="aux" value="#{peempEmpleController.aux}" title="aux" type="hidden"/>
+
+                </p:panelGrid>
+
+            </p:panelGrid>
+            <h:panelGrid columns="1" style="width: 100%">
+                <p:tabView>
+                    <p:tab title="Información Personal">
+                        <h:panelGrid columns="2" border="0" cellpadding="5px">
+                            <h:outputLabel value="Sexo:*" for="pesexCodigo" />
+                            <h:selectOneMenu id="pesexCodigo" value="#{peempEmpleController.selected.pesexCodigo}" title="#{bundle.CreatePeempEmpleTitle_pesexCodigo}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_pesexCodigo}">
+                                <f:selectItems value="#{pesexSexoController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Género:*" for="codgenero" />
+                            <h:selectOneMenu id="codgenero" value="#{peempEmpleController.selected.codgenero}" title="#{bundle.CreatePeempEmpleTitle_codgenero}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_codgenero}">
+                                <f:selectItems value="#{pegenGenerController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Fecha de Nacimiento:*" for="peempFecnacimiento" />
+                            <p:calendar id="peempFecnacimiento" value="#{peempEmpleController.selected.peempFecnacimiento}" title="#{bundle.CreatePeempEmpleTitle_peempFecnacimiento}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_peempFecnacimiento}" 
+                                        showOn="button" navigator="true">
+                                <f:convertDateTime pattern="dd/MM/yy" />
+                            </p:calendar>
+
+                            <h:outputLabel value="Estado Civil:*" for="peescCodigo" />
+                            <h:selectOneMenu id="peescCodigo" value="#{peempEmpleController.selected.peescCodigo}" title="#{bundle.CreatePeempEmpleTitle_peescCodigo}" >
+                                <f:selectItems value="#{peestEstcivController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Nacionalidad:*" for="codnacion" />
+                            <h:selectOneMenu id="codnacion" value="#{peempEmpleController.selected.codnacion}" title="#{bundle.CreatePeempEmpleTitle_codnacion}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_codnacion}">
+                                <f:selectItems value="#{penacNacionController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+
+
+                        </h:panelGrid>
+                    </p:tab>
+
+                    <p:tab title="Información de Contacto">
+                        <p:growl id="msgEmail" showDetail="true" life="7000" />
+
+                        <h:panelGrid columns="2" cellpadding="5px">
+
+                            <h:outputLabel value="Dirección/Calle Principal:*" for="pedirCalleprincipal" />
+                            <h:inputText id="pedirCalleprincipal" value="#{peempEmpleController.selected.pedirCodigodireccion.pedirCalleprincipal}" title="#{bundle.CreatePeempEmpleTitle_pedirCalleprincipal}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_pedirCalleprincipal}"/>
+                            <h:outputLabel value="Dirección/Calle Secundaria:*" for="pedirCallesecundaria" />
+                            <h:inputText id="pedirCallesecundaria" value="#{peempEmpleController.selected.pedirCodigodireccion.pedirCallesecundaria}" title="#{bundle.CreatePeempEmpleTitle_pedirCallesecundaria}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_pedirCallesecundaria}"/>
+                            <h:outputLabel value="Teléfono:*" for="peempTelefono" />
+                            <h:inputText id="peempTelefono" value="#{peempEmpleController.selected.peempTelefono}" title="#{bundle.CreatePeempEmpleTitle_peempTelefono}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_peempTelefono}"/>
+                            <h:outputLabel value="Email:*" for="peempEmail" />
+                            <h:inputText id="peempEmail" value="#{peempEmpleController.selected.peempEmail}" title="#{bundle.CreatePeempEmpleTitle_peempEmail}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_peempEmail}">
+                                <f:validator validatorId="EmailValidator"/>
+                                <p:ajax update="msgEmail" event="blur" />
+                            </h:inputText>
+                            <h:outputLabel value="País/Provincia/Cantón/Parroquia:*" for="peparParroq" />
+                            <h:selectOneMenu id="peparParroq" value="#{peempEmpleController.selected.pedirCodigodireccion.peparParroq}" title="#{bundle.CreatePeempEmpleTitle_peparParroq}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_peparParroq}">
+                                <f:selectItems value="#{peparParroqController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+
+                        </h:panelGrid>
+                    </p:tab>
+
+                    <p:tab title="Información Laboral">
+                        <h:panelGrid columns="2" cellpadding="5px">
+
+
+
+                            <h:outputLabel value="Salario:*" for="peempSalario" />
+                            <h:inputText id="peempSalario" value="#{peempEmpleController.selected.peempSalario}" title="#{bundle.CreatePeempEmpleTitle_peempSalario}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_peempSalario}"/>
+                            <h:outputLabel value="Departamento:*" for="coddepart" />
+                            <h:selectOneMenu id="coddepart" value="#{peempEmpleController.selected.coddepart}" title="#{bundle.CreatePeempEmpleTitle_coddepart}" required="true" requiredMessage="#{bundle.CreatePeempEmpleRequiredMessage_coddepart}">
+                                <f:selectItems value="#{tedepDepartController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+
+                        </h:panelGrid>
+                    </p:tab>
+                </p:tabView>
+
+                <p:commandButton action="#{peempEmpleController.update}" value="Editar" ajax="false"/>
+
+            </h:panelGrid>
+
+        </p:dialog>
+
+    </h:form>
+
+</ui:composition>

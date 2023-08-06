@@ -1,0 +1,132 @@
+* {
+    margin: 0px; 
+    padding: 0px; 
+}
+body{
+    height: 100vh;
+    width:100vw;
+}
+.container{
+    height: 100vh;
+    width:100vw;
+    display: flex;
+    /*align-items: stretch;*/
+}
+#imgLeft{
+    margin: auto;
+    display: flex;
+    height: 90vh;
+    width: 60vw;
+    float: left;
+}
+#imagenPrincipal{
+    height: 70vh;
+    margin: auto;
+}
+/**/
+#divForm{
+    margin: auto;
+    width:40vw;
+    height: 90vh;
+    float: right;
+    display: flex;
+}
+#formGroup{
+    min-width: 350px;
+    min-height: 40px;
+    margin: auto;
+}
+#formLogin {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  width: 35vw;
+  max-width: 450px;
+  min-width: 450px;
+  padding: 0 30px 30px 30px;
+  opacity: 0.95;
+  box-shadow: 0px 0px 9px 1px rgba(13, 67, 128, 0.44); /* borde de dos colores*/
+  background-color: #3C68A4;
+  border-radius: 7px;
+}
+
+input {
+  display: block; /*Para ocupar todo el espacio disponible*/
+  padding: 10px;
+  width: 100%;
+  margin: 15px 0; /*margin top 30*/
+  margin-bottom: 30px;
+  border-radius: 5px;
+  height: 35px;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+}
+/*@media (max-widht: 768px) {
+  #formLogin {
+    width: 75%;
+  }
+
+  .g-recaptcha,
+  #rc-imageselect {
+    transform: scale(0.75);
+    transform-origin: 0 0;
+  }
+}
+
+@media (max-widht: 480px) {
+  #formLogin {
+    width: 100%;
+  }
+}*/
+
+.imagenUsuario img {
+  margin-top: -50px;
+  margin-bottom: 35px;
+  width: 100px;
+  height: 100px;
+  box-shadow: 0px 0px 3px #848484;
+  border-radius: 50%;
+  margin-left: auto;
+  display: inline-block;
+}
+
+#FormResetPassword{
+text-align: center;
+}
+
+.label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    float: left;
+}
+
+.verde{
+    background-color: #63A43A;
+    color: #ffffff;
+    padding: 3px 0px;
+}
+
+.verde:hover{
+    background-color: #6DB440;
+}
+
+.registro{
+    background-color: #ffffff;
+    color: #63A43A;
+}
+
+.registro:hover{
+    color: #3b5c18;
+}
+
+.titulo-login{
+    color: #ffffff;
+    font-size: 24px;
+}
+
+.aumento{
+    font-size: 18px !important;
+}

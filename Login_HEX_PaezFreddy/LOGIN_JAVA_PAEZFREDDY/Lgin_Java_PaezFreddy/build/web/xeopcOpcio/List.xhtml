@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <ui:include src="/WEB-INF/jsfFragment/menu.xhtml" />
+        </ui:define>
+        <ui:define name="body">
+            <center>
+                <p:growl id="growl" showDetail="true" life="3000" />
+                <h2>Opciones</h2>
+                <h:form >
+                    <p:commandButton action="#{xeopcOpcioController.prepareCreate}" value="Crear" ajax="false" icon="pi pi-plus"/>
+                    <br/><br/>
+                    <h:outputText escape="false" value="#{bundle.ListXeopcOpcioEmpty}" rendered="#{xeopcOpcioController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{xeopcOpcioController.items.rowCount > 0}">
+                        <p:dataTable value="#{xeopcOpcioController.items}" var="item" style="width: 80%" paginator="true" rows="5" >
+                            <p:column sortBy="#{item.xeopcOpcioPK.xeopcCodigo}">
+                                <f:facet name="header">
+                                    <h:outputText value="Código"/>
+                                </f:facet>
+                                <h:outputText value="#{item.xeopcOpcioPK.xeopcCodigo}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Descripción"/>
+                                </f:facet>
+                                <h:outputText value="#{item.xeopcDescri}"/>
+                            </p:column>
+                            <p:column sortBy="#{item.xesisVentan.xevenMensaj}">
+                                <f:facet name="header">
+                                    <h:outputText value="Ventana"/>
+                                </f:facet>
+                                <h:outputText value="#{item.xesisVentan.xevenMensaj}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Acciones"/>
+                                </f:facet>
+
+                                <p:commandButton action="#{xeopcOpcioController.prepareView}" ajax="false" icon="pi pi-eye" class="bg-success text-white"/>
+                                <h:outputText value=" "/>
+                                <p:commandButton action="#{xeopcOpcioController.prepareEdit}"  icon="pi pi-pencil" ajax="false"/>
+                                <h:outputText value=" "/>
+                                <p:commandButton action="#{xeopcOpcioController.destroy}" ajax="false" class="bg-danger text-white" icon="pi pi-trash"/>
+
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGroup>
+                </h:form>
+            </center>
+        </ui:define>
+    </ui:composition>
+
+</html>

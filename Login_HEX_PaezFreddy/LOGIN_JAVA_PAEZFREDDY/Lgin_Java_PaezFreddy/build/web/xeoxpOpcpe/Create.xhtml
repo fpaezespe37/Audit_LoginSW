@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="XeoxpOpcpeCreateDlg" widgetVar="XeoxpOpcpeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateXeoxpOpcpeTitle}">
+            <h:form id="XeoxpOpcpeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{xeoxpOpcpeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateXeoxpOpcpeLabel_xeoxpOpcpePK_xeoxpOpcper}" for="xeoxpOpcpePK_xeoxpOpcper" />
+                        <p:inputText id="xeoxpOpcpePK_xeoxpOpcper" value="#{xeoxpOpcpeController.selected.xeoxpOpcpePK.xeoxpOpcper}" title="#{bundle.CreateXeoxpOpcpeTitle_xeoxpOpcpePK_xeoxpOpcper}" required="true" requiredMessage="#{bundle.CreateXeoxpOpcpeRequiredMessage_xeoxpOpcpePK_xeoxpOpcper}"/>
+                        <p:outputLabel value="#{bundle.CreateXeoxpOpcpeLabel_xeoxpFecasi}" for="xeoxpFecasi" />
+                        <p:calendar id="xeoxpFecasi" pattern="MM/dd/yyyy" value="#{xeoxpOpcpeController.selected.xeoxpFecasi}" title="#{bundle.EditXeoxpOpcpeTitle_xeoxpFecasi}" required="true" requiredMessage="#{bundle.EditXeoxpOpcpeRequiredMessage_xeoxpFecasi}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateXeoxpOpcpeLabel_xeoxpFecret}" for="xeoxpFecret" />
+                        <p:calendar id="xeoxpFecret" pattern="MM/dd/yyyy" value="#{xeoxpOpcpeController.selected.xeoxpFecret}" title="#{bundle.EditXeoxpOpcpeTitle_xeoxpFecret}" required="true" requiredMessage="#{bundle.EditXeoxpOpcpeRequiredMessage_xeoxpFecret}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateXeoxpOpcpeLabel_xeopcOpcio}" for="xeopcOpcio" />
+                        <p:selectOneMenu id="xeopcOpcio" value="#{xeoxpOpcpeController.selected.xeopcOpcio}" required="true" requiredMessage="#{bundle.EditXeoxpOpcpeRequiredMessage_xeopcOpcio}">
+                            <f:selectItems value="#{xeopcOpcioController.itemsAvailableSelectOne}"
+                                           var="xeopcOpcioItem"
+                                           itemValue="#{xeopcOpcioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateXeoxpOpcpeLabel_xeperPerfi}" for="xeperPerfi" />
+                        <p:selectOneMenu id="xeperPerfi" value="#{xeoxpOpcpeController.selected.xeperPerfi}" required="true" requiredMessage="#{bundle.EditXeoxpOpcpeRequiredMessage_xeperPerfi}">
+                            <f:selectItems value="#{xeperPerfiController.itemsAvailableSelectOne}"
+                                           var="xeperPerfiItem"
+                                           itemValue="#{xeperPerfiItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{xeoxpOpcpeController.create}" value="#{bundle.Save}" update="display,:XeoxpOpcpeListForm:datalist,:growl" oncomplete="handleSubmit(args,'XeoxpOpcpeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="XeoxpOpcpeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

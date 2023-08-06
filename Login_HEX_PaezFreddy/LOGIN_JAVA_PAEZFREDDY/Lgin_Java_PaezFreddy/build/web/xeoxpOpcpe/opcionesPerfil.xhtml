@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:composition template="../template.xhtml">
+        <ui:define name="style">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+            <link rel="stylesheet" href="style.css"/>
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+            <!-- Compiled and minified JavaScript -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        </ui:define>
+        
+        <ui:define name="title">
+            <ui:include src="/WEB-INF/jsfFragment/menu.xhtml" />
+        </ui:define>
+        <ui:define name="body">
+            <p:growl id="growl" showDetail="true" life="3000" />
+            <h:form>
+                <div class="content">            
+                    <div class="col s12 m7">
+                        <center>
+                        <h4 class="header">Asignación de Opciones por Perfil</h4> <br/>
+                        
+                        <div class="card horizontal" style="width:40%">
+                            
+                            <div class="card-stacked">
+                                <div id="card-header" >
+                                    <p:panelGrid columns="2">
+                                        <h:outputText value="Perfil:"/> 
+                                        <p:selectOneMenu  value="#{asignacionOpcionesController.perfil}" style="width: 300px">
+                                            <p:ajax event="valueChange" update="OpcionesDisponibles" listener="#{asignacionOpcionesController.initTree()}"/>  
+                                            <f:selectItem 
+                                                itemLabel="Seleccione un perfil" 
+                                                itemValue=""
+                                                />
+                                            <f:selectItems value="#{xeperPerfiController.itemsAvailableSelectMany}"
+                                                           var="perfilItem"
+                                                                                                                      
+                                                           itemLabel="#{perfilItem}" 
+                                                           itemValue="#{perfilItem}"
+                                                           />
+                                        </p:selectOneMenu>
+                                    </p:panelGrid>
+                                </div> 
+                                <div class="card-content">
+                                    <p:panelGrid columns="1" id="OpcionesDisponibles" >
+                                        <p:tree value="#{asignacionOpcionesController.root}" var="node" style="margin: 0 auto;">
+
+
+                                            <p:treeNode>
+                                                <h:outputText value="#{node}" />
+                                            </p:treeNode>
+                                            <p:treeNode type="Opc">
+                                                <p:selectOneRadio value="#{asignacionOpcionesController.option_values[asignacionOpcionesController.getValue(node)]}" 
+                                                                  valueChangeListener="#{asignacionOpcionesController.manageChange2}" 
+                                                                  layout="grid" columns="1" unselectable="true">
+                                                    <f:selectItems value="#{node}" var="o" itemValue="#{o}" itemLabel="#{o.getXeopcDescri()}" />
+
+
+                                                    <p:ajax listener="#{asignacionOpcionesController.manageChange}"/>
+                                                </p:selectOneRadio>
+                                            </p:treeNode>
+                                        </p:tree>
+                                        
+                                        <p:commandButton disabled="#{asignacionOpcionesController.updating}" value="Guardar" ajax="true" action="#{asignacionOpcionesController.save()}" update=":growl">
+                                            <p:autoUpdate/>
+                                        </p:commandButton>
+                                        
+                                    </p:panelGrid>
+                                </div>
+                            </div>
+                        
+                        </div>
+                            </center>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

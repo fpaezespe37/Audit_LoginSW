@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PecanCantonCreateDlg" widgetVar="PecanCantonCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePecanCantonTitle}">
+            <h:form id="PecanCantonCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pecanCantonController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePecanCantonLabel_pecanCantonPK_pecanCodigo}" for="pecanCantonPK_pecanCodigo" />
+                        <p:inputText id="pecanCantonPK_pecanCodigo" value="#{pecanCantonController.selected.pecanCantonPK.pecanCodigo}" title="#{bundle.CreatePecanCantonTitle_pecanCantonPK_pecanCodigo}" required="true" requiredMessage="#{bundle.CreatePecanCantonRequiredMessage_pecanCantonPK_pecanCodigo}"/>
+                        <p:outputLabel value="#{bundle.CreatePecanCantonLabel_pecanDescri}" for="pecanDescri" />
+                        <p:inputText id="pecanDescri" value="#{pecanCantonController.selected.pecanDescri}" title="#{bundle.CreatePecanCantonTitle_pecanDescri}" required="true" requiredMessage="#{bundle.CreatePecanCantonRequiredMessage_pecanDescri}"/>
+                        <p:outputLabel value="#{bundle.CreatePecanCantonLabel_peproProvin}" for="peproProvin" />
+                        <p:selectOneMenu id="peproProvin" value="#{pecanCantonController.selected.peproProvin}" required="true" requiredMessage="#{bundle.EditPecanCantonRequiredMessage_peproProvin}">
+                            <f:selectItems value="#{peproProvinController.itemsAvailableSelectOne}"
+                                           var="peproProvinItem"
+                                           itemValue="#{peproProvinItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pecanCantonController.create}" value="#{bundle.Save}" update="display,:PecanCantonListForm:datalist,:growl" oncomplete="handleSubmit(args,'PecanCantonCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PecanCantonCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PeestEstcivEditDlg" widgetVar="PeestEstcivEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPeestEstcivTitle}">
+            <h:form id="PeestEstcivEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{peestEstcivController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPeestEstcivLabel_peescCodigo}" for="peescCodigo" />
+                        <p:inputText id="peescCodigo" value="#{peestEstcivController.selected.peescCodigo}" title="#{bundle.EditPeestEstcivTitle_peescCodigo}" required="true" requiredMessage="#{bundle.EditPeestEstcivRequiredMessage_peescCodigo}"/>
+                        <p:outputLabel value="#{bundle.EditPeestEstcivLabel_peescNomb}" for="peescNomb" />
+                        <p:inputText id="peescNomb" value="#{peestEstcivController.selected.peescNomb}" title="#{bundle.EditPeestEstcivTitle_peescNomb}" required="true" requiredMessage="#{bundle.EditPeestEstcivRequiredMessage_peescNomb}"/>
+                        <p:outputLabel value="#{bundle.EditPeestEstcivLabel_peescDescri}" for="peescDescri" />
+                        <p:inputText id="peescDescri" value="#{peestEstcivController.selected.peescDescri}" title="#{bundle.EditPeestEstcivTitle_peescDescri}" required="true" requiredMessage="#{bundle.EditPeestEstcivRequiredMessage_peescDescri}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{peestEstcivController.update}" value="#{bundle.Save}" update="display,:PeestEstcivListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PeestEstcivEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PeestEstcivEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

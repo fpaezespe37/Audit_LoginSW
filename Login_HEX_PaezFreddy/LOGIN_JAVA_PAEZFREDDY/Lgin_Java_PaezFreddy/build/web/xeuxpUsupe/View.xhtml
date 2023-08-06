@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="XeuxpUsupeViewDlg" widgetVar="XeuxpUsupeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewXeuxpUsupeTitle}">
+            <h:form id="XeuxpUsupeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{xeuxpUsupeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewXeuxpUsupeLabel_xeuxpUsupePK_xeuxpCodusu}"/>
+                        <h:outputText value="#{xeuxpUsupeController.selected.xeuxpUsupePK.xeuxpCodusu}" title="#{bundle.ViewXeuxpUsupeTitle_xeuxpUsupePK_xeuxpCodusu}"/>
+                        <h:outputText value="#{bundle.ViewXeuxpUsupeLabel_xeuxpFecasi}"/>
+                        <h:outputText value="#{xeuxpUsupeController.selected.xeuxpFecasi}" title="#{bundle.ViewXeuxpUsupeTitle_xeuxpFecasi}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewXeuxpUsupeLabel_xeuxpFecret}"/>
+                        <h:outputText value="#{xeuxpUsupeController.selected.xeuxpFecret}" title="#{bundle.ViewXeuxpUsupeTitle_xeuxpFecret}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewXeuxpUsupeLabel_xeperPerfi}"/>
+                        <h:outputText value="#{xeuxpUsupeController.selected.xeperPerfi}" title="#{bundle.ViewXeuxpUsupeTitle_xeperPerfi}"/>
+                        <h:outputText value="#{bundle.ViewXeuxpUsupeLabel_xeusuUsuar}"/>
+                        <h:outputText value="#{xeuxpUsupeController.selected.xeusuUsuar}" title="#{bundle.ViewXeuxpUsupeTitle_xeusuUsuar}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="XeuxpUsupeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

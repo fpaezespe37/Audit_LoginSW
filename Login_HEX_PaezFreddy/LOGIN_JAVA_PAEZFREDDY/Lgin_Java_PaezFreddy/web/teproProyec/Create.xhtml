@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TeproProyecCreateDlg" widgetVar="TeproProyecCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTeproProyecTitle}">
+            <h:form id="TeproProyecCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{teproProyecController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTeproProyecLabel_codproyec}" for="codproyec" />
+                        <p:inputText id="codproyec" value="#{teproProyecController.selected.codproyec}" title="#{bundle.CreateTeproProyecTitle_codproyec}" required="true" requiredMessage="#{bundle.CreateTeproProyecRequiredMessage_codproyec}"/>
+                        <p:outputLabel value="#{bundle.CreateTeproProyecLabel_numproyecto}" for="numproyecto" />
+                        <p:inputText id="numproyecto" value="#{teproProyecController.selected.numproyecto}" title="#{bundle.CreateTeproProyecTitle_numproyecto}" required="true" requiredMessage="#{bundle.CreateTeproProyecRequiredMessage_numproyecto}"/>
+                        <p:outputLabel value="#{bundle.CreateTeproProyecLabel_nombreproyecto}" for="nombreproyecto" />
+                        <p:inputText id="nombreproyecto" value="#{teproProyecController.selected.nombreproyecto}" title="#{bundle.CreateTeproProyecTitle_nombreproyecto}" required="true" requiredMessage="#{bundle.CreateTeproProyecRequiredMessage_nombreproyecto}"/>
+                        <p:outputLabel value="#{bundle.CreateTeproProyecLabel_coddepart}" for="coddepart" />
+                        <p:selectOneMenu id="coddepart" value="#{teproProyecController.selected.coddepart}" required="true" requiredMessage="#{bundle.EditTeproProyecRequiredMessage_coddepart}">
+                            <f:selectItems value="#{tedepDepartController.itemsAvailableSelectOne}"
+                                           var="coddepartItem"
+                                           itemValue="#{coddepartItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTeproProyecLabel_teparPartic}" for="teparPartic" />
+                        <p:selectOneMenu id="teparPartic" value="#{teproProyecController.selected.teparPartic}" >
+                            <f:selectItems value="#{teparParticController.itemsAvailableSelectOne}"
+                                           var="teparParticItem"
+                                           itemValue="#{teparParticItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{teproProyecController.create}" value="#{bundle.Save}" update="display,:TeproProyecListForm:datalist,:growl" oncomplete="handleSubmit(args,'TeproProyecCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TeproProyecCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

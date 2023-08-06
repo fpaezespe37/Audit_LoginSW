@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PefamFamiliViewDlg" widgetVar="PefamFamiliViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPefamFamiliTitle}">
+            <h:form id="PefamFamiliViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pefamFamiliController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPefamFamiliLabel_peempCurp}"/>
+                        <h:outputText value="#{pefamFamiliController.selected.peempCurp}" title="#{bundle.ViewPefamFamiliTitle_peempCurp}"/>
+                        <h:outputText value="#{bundle.ViewPefamFamiliLabel_pefamFamnombre}"/>
+                        <h:outputText value="#{pefamFamiliController.selected.pefamFamnombre}" title="#{bundle.ViewPefamFamiliTitle_pefamFamnombre}"/>
+                        <h:outputText value="#{bundle.ViewPefamFamiliLabel_pefamFamapellpaterno}"/>
+                        <h:outputText value="#{pefamFamiliController.selected.pefamFamapellpaterno}" title="#{bundle.ViewPefamFamiliTitle_pefamFamapellpaterno}"/>
+                        <h:outputText value="#{bundle.ViewPefamFamiliLabel_pefamFamapellmaterno}"/>
+                        <h:outputText value="#{pefamFamiliController.selected.pefamFamapellmaterno}" title="#{bundle.ViewPefamFamiliTitle_pefamFamapellmaterno}"/>
+                        <h:outputText value="#{bundle.ViewPefamFamiliLabel_pefamFamfecnacimiento}"/>
+                        <h:outputText value="#{pefamFamiliController.selected.pefamFamfecnacimiento}" title="#{bundle.ViewPefamFamiliTitle_pefamFamfecnacimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPefamFamiliLabel_pefamParentesco}"/>
+                        <h:outputText value="#{pefamFamiliController.selected.pefamParentesco}" title="#{bundle.ViewPefamFamiliTitle_pefamParentesco}"/>
+                        <h:outputText value="#{bundle.ViewPefamFamiliLabel_peempEmple}"/>
+                        <h:outputText value="#{pefamFamiliController.selected.peempEmple}" title="#{bundle.ViewPefamFamiliTitle_peempEmple}"/>
+                        <h:outputText value="#{bundle.ViewPefamFamiliLabel_codgenero}"/>
+                        <h:outputText value="#{pefamFamiliController.selected.codgenero}" title="#{bundle.ViewPefamFamiliTitle_codgenero}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PefamFamiliViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

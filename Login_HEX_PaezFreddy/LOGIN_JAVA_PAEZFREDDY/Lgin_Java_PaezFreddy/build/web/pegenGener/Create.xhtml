@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PegenGenerCreateDlg" widgetVar="PegenGenerCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePegenGenerTitle}">
+            <h:form id="PegenGenerCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pegenGenerController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePegenGenerLabel_codgenero}" for="codgenero" />
+                        <p:inputText id="codgenero" value="#{pegenGenerController.selected.codgenero}" title="#{bundle.CreatePegenGenerTitle_codgenero}" required="true" requiredMessage="#{bundle.CreatePegenGenerRequiredMessage_codgenero}"/>
+                        <p:outputLabel value="#{bundle.CreatePegenGenerLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{pegenGenerController.selected.descripcion}" title="#{bundle.CreatePegenGenerTitle_descripcion}" required="true" requiredMessage="#{bundle.CreatePegenGenerRequiredMessage_descripcion}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pegenGenerController.create}" value="#{bundle.Save}" update="display,:PegenGenerListForm:datalist,:growl" oncomplete="handleSubmit(args,'PegenGenerCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PegenGenerCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

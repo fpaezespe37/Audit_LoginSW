@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PeparParroqEditDlg" widgetVar="PeparParroqEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPeparParroqTitle}">
+            <h:form id="PeparParroqEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{peparParroqController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPeparParroqLabel_peparParroqPK_peparCodigo}" for="peparParroqPK_peparCodigo" />
+                        <p:inputText id="peparParroqPK_peparCodigo" value="#{peparParroqController.selected.peparParroqPK.peparCodigo}" title="#{bundle.EditPeparParroqTitle_peparParroqPK_peparCodigo}" required="true" requiredMessage="#{bundle.EditPeparParroqRequiredMessage_peparParroqPK_peparCodigo}"/>
+                        <p:outputLabel value="#{bundle.EditPeparParroqLabel_peparDescri}" for="peparDescri" />
+                        <p:inputText id="peparDescri" value="#{peparParroqController.selected.peparDescri}" title="#{bundle.EditPeparParroqTitle_peparDescri}" required="true" requiredMessage="#{bundle.EditPeparParroqRequiredMessage_peparDescri}"/>
+                        <p:outputLabel value="#{bundle.EditPeparParroqLabel_pecanCanton}" for="pecanCanton" />
+                        <p:selectOneMenu id="pecanCanton" value="#{peparParroqController.selected.pecanCanton}" required="true" requiredMessage="#{bundle.EditPeparParroqRequiredMessage_pecanCanton}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{pecanCantonController.itemsAvailableSelectOne}"
+                                           var="pecanCantonItem"
+                                           itemValue="#{pecanCantonItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{peparParroqController.update}" value="#{bundle.Save}" update="display,:PeparParroqListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PeparParroqEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PeparParroqEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

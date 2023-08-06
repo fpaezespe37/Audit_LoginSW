@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PefamFamiliCreateDlg" widgetVar="PefamFamiliCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePefamFamiliTitle}">
+            <h:form id="PefamFamiliCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pefamFamiliController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePefamFamiliLabel_peempCurp}" for="peempCurp" />
+                        <p:inputText id="peempCurp" value="#{pefamFamiliController.selected.peempCurp}" title="#{bundle.CreatePefamFamiliTitle_peempCurp}" required="true" requiredMessage="#{bundle.CreatePefamFamiliRequiredMessage_peempCurp}"/>
+                        <p:outputLabel value="#{bundle.CreatePefamFamiliLabel_pefamFamnombre}" for="pefamFamnombre" />
+                        <p:inputText id="pefamFamnombre" value="#{pefamFamiliController.selected.pefamFamnombre}" title="#{bundle.CreatePefamFamiliTitle_pefamFamnombre}" required="true" requiredMessage="#{bundle.CreatePefamFamiliRequiredMessage_pefamFamnombre}"/>
+                        <p:outputLabel value="#{bundle.CreatePefamFamiliLabel_pefamFamapellpaterno}" for="pefamFamapellpaterno" />
+                        <p:inputText id="pefamFamapellpaterno" value="#{pefamFamiliController.selected.pefamFamapellpaterno}" title="#{bundle.CreatePefamFamiliTitle_pefamFamapellpaterno}" required="true" requiredMessage="#{bundle.CreatePefamFamiliRequiredMessage_pefamFamapellpaterno}"/>
+                        <p:outputLabel value="#{bundle.CreatePefamFamiliLabel_pefamFamapellmaterno}" for="pefamFamapellmaterno" />
+                        <p:inputText id="pefamFamapellmaterno" value="#{pefamFamiliController.selected.pefamFamapellmaterno}" title="#{bundle.CreatePefamFamiliTitle_pefamFamapellmaterno}" required="true" requiredMessage="#{bundle.CreatePefamFamiliRequiredMessage_pefamFamapellmaterno}"/>
+                        <p:outputLabel value="#{bundle.CreatePefamFamiliLabel_pefamFamfecnacimiento}" for="pefamFamfecnacimiento" />
+                        <p:calendar id="pefamFamfecnacimiento" pattern="MM/dd/yyyy" value="#{pefamFamiliController.selected.pefamFamfecnacimiento}" title="#{bundle.EditPefamFamiliTitle_pefamFamfecnacimiento}" required="true" requiredMessage="#{bundle.EditPefamFamiliRequiredMessage_pefamFamfecnacimiento}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePefamFamiliLabel_pefamParentesco}" for="pefamParentesco" />
+                        <p:inputText id="pefamParentesco" value="#{pefamFamiliController.selected.pefamParentesco}" title="#{bundle.CreatePefamFamiliTitle_pefamParentesco}" required="true" requiredMessage="#{bundle.CreatePefamFamiliRequiredMessage_pefamParentesco}"/>
+                        <p:outputLabel value="#{bundle.CreatePefamFamiliLabel_peempEmple}" for="peempEmple" />
+                        <p:selectOneMenu id="peempEmple" value="#{pefamFamiliController.selected.peempEmple}" required="true" requiredMessage="#{bundle.EditPefamFamiliRequiredMessage_peempEmple}">
+                            <f:selectItems value="#{peempEmpleController.itemsAvailableSelectOne}"
+                                           var="peempEmpleItem"
+                                           itemValue="#{peempEmpleItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePefamFamiliLabel_codgenero}" for="codgenero" />
+                        <p:selectOneMenu id="codgenero" value="#{pefamFamiliController.selected.codgenero}" required="true" requiredMessage="#{bundle.EditPefamFamiliRequiredMessage_codgenero}">
+                            <f:selectItems value="#{pegenGenerController.itemsAvailableSelectOne}"
+                                           var="codgeneroItem"
+                                           itemValue="#{codgeneroItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pefamFamiliController.create}" value="#{bundle.Save}" update="display,:PefamFamiliListForm:datalist,:growl" oncomplete="handleSubmit(args,'PefamFamiliCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PefamFamiliCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

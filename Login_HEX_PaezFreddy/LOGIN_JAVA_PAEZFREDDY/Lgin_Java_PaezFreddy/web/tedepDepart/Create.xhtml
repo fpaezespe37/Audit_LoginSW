@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TedepDepartCreateDlg" widgetVar="TedepDepartCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTedepDepartTitle}">
+            <h:form id="TedepDepartCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tedepDepartController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTedepDepartLabel_coddepart}" for="coddepart" />
+                        <p:inputText id="coddepart" value="#{tedepDepartController.selected.coddepart}" title="#{bundle.CreateTedepDepartTitle_coddepart}" required="true" requiredMessage="#{bundle.CreateTedepDepartRequiredMessage_coddepart}"/>
+                        <p:outputLabel value="#{bundle.CreateTedepDepartLabel_numdepto}" for="numdepto" />
+                        <p:inputText id="numdepto" value="#{tedepDepartController.selected.numdepto}" title="#{bundle.CreateTedepDepartTitle_numdepto}" required="true" requiredMessage="#{bundle.CreateTedepDepartRequiredMessage_numdepto}"/>
+                        <p:outputLabel value="#{bundle.CreateTedepDepartLabel_nombredepto}" for="nombredepto" />
+                        <p:inputText id="nombredepto" value="#{tedepDepartController.selected.nombredepto}" title="#{bundle.CreateTedepDepartTitle_nombredepto}" required="true" requiredMessage="#{bundle.CreateTedepDepartRequiredMessage_nombredepto}"/>
+                        <p:outputLabel value="#{bundle.CreateTedepDepartLabel_ptdirDirigi}" for="ptdirDirigi" />
+                        <p:selectOneMenu id="ptdirDirigi" value="#{tedepDepartController.selected.ptdirDirigi}" >
+                            <f:selectItems value="#{ptdirDirigiController.itemsAvailableSelectOne}"
+                                           var="ptdirDirigiItem"
+                                           itemValue="#{ptdirDirigiItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tedepDepartController.create}" value="#{bundle.Save}" update="display,:TedepDepartListForm:datalist,:growl" oncomplete="handleSubmit(args,'TedepDepartCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TedepDepartCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

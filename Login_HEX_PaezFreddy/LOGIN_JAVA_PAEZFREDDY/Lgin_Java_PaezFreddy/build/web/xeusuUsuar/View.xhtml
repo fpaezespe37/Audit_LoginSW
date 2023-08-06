@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="XeusuUsuarViewDlg" widgetVar="XeusuUsuarViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewXeusuUsuarTitle}">
+            <h:form id="XeusuUsuarViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{xeusuUsuarController.selected != null}">
+                        <h:outputText value="#{bundle.ViewXeusuUsuarLabel_xeusuCodigo}"/>
+                        <h:outputText value="#{xeusuUsuarController.selected.xeusuCodigo}" title="#{bundle.ViewXeusuUsuarTitle_xeusuCodigo}"/>
+                        <h:outputText value="#{bundle.ViewXeusuUsuarLabel_xeusuPaswd}"/>
+                        <h:outputText value="#{xeusuUsuarController.selected.xeusuPaswd}" title="#{bundle.ViewXeusuUsuarTitle_xeusuPaswd}"/>
+                        <h:outputText value="#{bundle.ViewXeusuUsuarLabel_xeusuFeccre}"/>
+                        <h:outputText value="#{xeusuUsuarController.selected.xeusuFeccre}" title="#{bundle.ViewXeusuUsuarTitle_xeusuFeccre}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewXeusuUsuarLabel_xeusuFecmod}"/>
+                        <h:outputText value="#{xeusuUsuarController.selected.xeusuFecmod}" title="#{bundle.ViewXeusuUsuarTitle_xeusuFecmod}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewXeusuUsuarLabel_xeusuPiefir}"/>
+                        <h:outputText value="#{xeusuUsuarController.selected.xeusuPiefir}" title="#{bundle.ViewXeusuUsuarTitle_xeusuPiefir}"/>
+                        <h:outputText value="#{bundle.ViewXeusuUsuarLabel_peempCurp}"/>
+                        <h:outputText value="#{xeusuUsuarController.selected.peempCurp}" title="#{bundle.ViewXeusuUsuarTitle_peempCurp}"/>
+                        <h:outputText value="#{bundle.ViewXeusuUsuarLabel_xeestCodigo}"/>
+                        <h:outputText value="#{xeusuUsuarController.selected.xeestCodigo}" title="#{bundle.ViewXeusuUsuarTitle_xeestCodigo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="XeusuUsuarViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

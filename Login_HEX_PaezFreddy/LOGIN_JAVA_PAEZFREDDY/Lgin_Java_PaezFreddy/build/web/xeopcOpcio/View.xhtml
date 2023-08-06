@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <ui:include src="/WEB-INF/jsfFragment/menu.xhtml" />
+        </ui:define>
+        <ui:define name="body">
+            <center>
+                <p:panel header="Ver Opción" style="width: 50%">
+                    <h:form>
+                        <p:panelGrid columns="2">
+                            <h:outputText value="Código:"/>
+                            <h:outputText value="#{xeopcOpcioController.selected.xeopcOpcioPK.xeopcCodigo}" title="#{bundle.ViewXeopcOpcioTitle_xeopcOpcioPK_xeopcCodigo}"/>
+                            <h:outputText value="Descripción:"/>
+                            <h:outputText value="#{xeopcOpcioController.selected.xeopcDescri}" title="#{bundle.ViewXeopcOpcioTitle_xeopcDescri}"/>
+                            <h:outputText value="URL:"/>
+                            <h:outputText value="#{xeopcOpcioController.selected.xeopcUrl}" title="#{bundle.ViewXeopcOpcioTitle_xeopcUrl}"/>
+                            <h:outputText value="Ventana:"/>
+                            <h:outputText value="#{xeopcOpcioController.selected.xesisVentan.xevenMensaj}" title="#{bundle.ViewXeopcOpcioTitle_xesisVentan}"/>
+                        </p:panelGrid>
+                        <br />
+                        <br />
+                        <h:commandLink action="#{xeopcOpcioController.prepareList}" value="Lista de Opciones"/>
+                    </h:form>
+                </p:panel>
+            </center>
+        </ui:define>
+    </ui:composition>
+
+</html>

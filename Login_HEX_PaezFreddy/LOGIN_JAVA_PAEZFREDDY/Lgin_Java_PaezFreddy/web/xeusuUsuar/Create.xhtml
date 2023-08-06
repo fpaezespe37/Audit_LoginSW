@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="XeusuUsuarCreateDlg" widgetVar="XeusuUsuarCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateXeusuUsuarTitle}">
+            <h:form id="XeusuUsuarCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{xeusuUsuarController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateXeusuUsuarLabel_xeusuCodigo}" for="xeusuCodigo" />
+                        <p:inputText id="xeusuCodigo" value="#{xeusuUsuarController.selected.xeusuCodigo}" title="#{bundle.CreateXeusuUsuarTitle_xeusuCodigo}" required="true" requiredMessage="#{bundle.CreateXeusuUsuarRequiredMessage_xeusuCodigo}"/>
+                        <p:outputLabel value="#{bundle.CreateXeusuUsuarLabel_xeusuPaswd}" for="xeusuPaswd" />
+                        <p:inputText id="xeusuPaswd" value="#{xeusuUsuarController.selected.xeusuPaswd}" title="#{bundle.CreateXeusuUsuarTitle_xeusuPaswd}" required="true" requiredMessage="#{bundle.CreateXeusuUsuarRequiredMessage_xeusuPaswd}"/>
+                        <p:outputLabel value="#{bundle.CreateXeusuUsuarLabel_xeusuFeccre}" for="xeusuFeccre" />
+                        <p:calendar id="xeusuFeccre" pattern="MM/dd/yyyy HH:mm:ss" value="#{xeusuUsuarController.selected.xeusuFeccre}" title="#{bundle.EditXeusuUsuarTitle_xeusuFeccre}" required="true" requiredMessage="#{bundle.EditXeusuUsuarRequiredMessage_xeusuFeccre}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateXeusuUsuarLabel_xeusuFecmod}" for="xeusuFecmod" />
+                        <p:calendar id="xeusuFecmod" pattern="MM/dd/yyyy HH:mm:ss" value="#{xeusuUsuarController.selected.xeusuFecmod}" title="#{bundle.EditXeusuUsuarTitle_xeusuFecmod}" required="true" requiredMessage="#{bundle.EditXeusuUsuarRequiredMessage_xeusuFecmod}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateXeusuUsuarLabel_xeusuPiefir}" for="xeusuPiefir" />
+                        <p:inputText id="xeusuPiefir" value="#{xeusuUsuarController.selected.xeusuPiefir}" title="#{bundle.CreateXeusuUsuarTitle_xeusuPiefir}" required="true" requiredMessage="#{bundle.CreateXeusuUsuarRequiredMessage_xeusuPiefir}"/>
+                        <p:outputLabel value="#{bundle.CreateXeusuUsuarLabel_peempCurp}" for="peempCurp" />
+                        <p:selectOneMenu id="peempCurp" value="#{xeusuUsuarController.selected.peempCurp}" required="true" requiredMessage="#{bundle.EditXeusuUsuarRequiredMessage_peempCurp}">
+                            <f:selectItems value="#{peempEmpleController.itemsAvailableSelectOne}"
+                                           var="peempCurpItem"
+                                           itemValue="#{peempCurpItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateXeusuUsuarLabel_xeestCodigo}" for="xeestCodigo" />
+                        <p:selectOneMenu id="xeestCodigo" value="#{xeusuUsuarController.selected.xeestCodigo}" required="true" requiredMessage="#{bundle.EditXeusuUsuarRequiredMessage_xeestCodigo}">
+                            <f:selectItems value="#{xeestEstadController.itemsAvailableSelectOne}"
+                                           var="xeestCodigoItem"
+                                           itemValue="#{xeestCodigoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{xeusuUsuarController.create}" value="#{bundle.Save}" update="display,:XeusuUsuarListForm:datalist,:growl" oncomplete="handleSubmit(args,'XeusuUsuarCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="XeusuUsuarCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

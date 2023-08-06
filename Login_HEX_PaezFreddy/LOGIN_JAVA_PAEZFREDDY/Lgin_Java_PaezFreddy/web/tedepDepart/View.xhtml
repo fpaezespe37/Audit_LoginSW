@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TedepDepartViewDlg" widgetVar="TedepDepartViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTedepDepartTitle}">
+            <h:form id="TedepDepartViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tedepDepartController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTedepDepartLabel_coddepart}"/>
+                        <h:outputText value="#{tedepDepartController.selected.coddepart}" title="#{bundle.ViewTedepDepartTitle_coddepart}"/>
+                        <h:outputText value="#{bundle.ViewTedepDepartLabel_numdepto}"/>
+                        <h:outputText value="#{tedepDepartController.selected.numdepto}" title="#{bundle.ViewTedepDepartTitle_numdepto}"/>
+                        <h:outputText value="#{bundle.ViewTedepDepartLabel_nombredepto}"/>
+                        <h:outputText value="#{tedepDepartController.selected.nombredepto}" title="#{bundle.ViewTedepDepartTitle_nombredepto}"/>
+                        <h:outputText value="#{bundle.ViewTedepDepartLabel_ptdirDirigi}"/>
+                        <h:outputText value="#{tedepDepartController.selected.ptdirDirigi}" title="#{bundle.ViewTedepDepartTitle_ptdirDirigi}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TedepDepartViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

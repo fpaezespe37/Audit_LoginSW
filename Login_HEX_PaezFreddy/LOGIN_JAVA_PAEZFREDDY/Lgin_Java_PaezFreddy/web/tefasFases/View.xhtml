@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TefasFasesViewDlg" widgetVar="TefasFasesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTefasFasesTitle}">
+            <h:form id="TefasFasesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tefasFasesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTefasFasesLabel_codfase}"/>
+                        <h:outputText value="#{tefasFasesController.selected.codfase}" title="#{bundle.ViewTefasFasesTitle_codfase}"/>
+                        <h:outputText value="#{bundle.ViewTefasFasesLabel_numfase}"/>
+                        <h:outputText value="#{tefasFasesController.selected.numfase}" title="#{bundle.ViewTefasFasesTitle_numfase}"/>
+                        <h:outputText value="#{bundle.ViewTefasFasesLabel_duracion}"/>
+                        <h:outputText value="#{tefasFasesController.selected.duracion}" title="#{bundle.ViewTefasFasesTitle_duracion}"/>
+                        <h:outputText value="#{bundle.ViewTefasFasesLabel_fechainicio}"/>
+                        <h:outputText value="#{tefasFasesController.selected.fechainicio}" title="#{bundle.ViewTefasFasesTitle_fechainicio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTefasFasesLabel_presupuesto}"/>
+                        <h:outputText value="#{tefasFasesController.selected.presupuesto}" title="#{bundle.ViewTefasFasesTitle_presupuesto}"/>
+                        <h:outputText value="#{bundle.ViewTefasFasesLabel_objetivo}"/>
+                        <h:outputText value="#{tefasFasesController.selected.objetivo}" title="#{bundle.ViewTefasFasesTitle_objetivo}"/>
+                        <h:outputText value="#{bundle.ViewTefasFasesLabel_alcance}"/>
+                        <h:outputText value="#{tefasFasesController.selected.alcance}" title="#{bundle.ViewTefasFasesTitle_alcance}"/>
+                        <h:outputText value="#{bundle.ViewTefasFasesLabel_codproyec}"/>
+                        <h:outputText value="#{tefasFasesController.selected.codproyec}" title="#{bundle.ViewTefasFasesTitle_codproyec}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TefasFasesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <ui:include src="/WEB-INF/jsfFragment/menu.xhtml" />
+        </ui:define>
+        <ui:define name="body">
+            <p:growl id="growl" showDetail="true" />
+            <center>
+                <p:panel header="Cambiar Contraseña" style="width: 50%">
+                    <h:form>
+                        <p:panelGrid columns="2" id="pGrid" style="width: 50%">
+                            <p:outputLabel value="Correo:" for="correo"/>
+                            <p:inputText id="correo" value="#{xeusuUsuarController.selected.peempEmple.peempEmail}" required="true" placeholder="Ingrese su correo" readonly="true"/>
+                            <p:column />
+                            <p:commandButton value="Resetear contraseña" actionListener="#{xeusuUsuarController.resetearPassword()}" update="growl"/>
+                        </p:panelGrid>
+                    </h:form>
+                    <div class="bd-callout bd-callout-info fst-italic mt-2 ">Al seleccionar "Resetear contraseña" se enviará un correo con la nueva contraseña </div>
+                </p:panel>
+            </center>
+        </ui:define>
+    </ui:composition>
+
+</html>
+

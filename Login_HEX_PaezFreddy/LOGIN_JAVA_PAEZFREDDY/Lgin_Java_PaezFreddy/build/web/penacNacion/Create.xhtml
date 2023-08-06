@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PenacNacionCreateDlg" widgetVar="PenacNacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePenacNacionTitle}">
+            <h:form id="PenacNacionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{penacNacionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePenacNacionLabel_codnacion}" for="codnacion" />
+                        <p:inputText id="codnacion" value="#{penacNacionController.selected.codnacion}" title="#{bundle.CreatePenacNacionTitle_codnacion}" required="true" requiredMessage="#{bundle.CreatePenacNacionRequiredMessage_codnacion}"/>
+                        <p:outputLabel value="#{bundle.CreatePenacNacionLabel_descrinac}" for="descrinac" />
+                        <p:inputText id="descrinac" value="#{penacNacionController.selected.descrinac}" title="#{bundle.CreatePenacNacionTitle_descrinac}" required="true" requiredMessage="#{bundle.CreatePenacNacionRequiredMessage_descrinac}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{penacNacionController.create}" value="#{bundle.Save}" update="display,:PenacNacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'PenacNacionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PenacNacionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

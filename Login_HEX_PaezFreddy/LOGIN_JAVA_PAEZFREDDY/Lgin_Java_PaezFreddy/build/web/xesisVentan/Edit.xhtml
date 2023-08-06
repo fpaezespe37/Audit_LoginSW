@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="XesisVentanEditDlg" widgetVar="XesisVentanEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditXesisVentanTitle}">
+            <h:form id="XesisVentanEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{xesisVentanController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditXesisVentanLabel_xevenCodigo}" for="xevenCodigo" />
+                        <p:inputText id="xevenCodigo" value="#{xesisVentanController.selected.xevenCodigo}" title="#{bundle.EditXesisVentanTitle_xevenCodigo}" required="true" requiredMessage="#{bundle.EditXesisVentanRequiredMessage_xevenCodigo}"/>
+                        <p:outputLabel value="#{bundle.EditXesisVentanLabel_xevenDescri}" for="xevenDescri" />
+                        <p:inputText id="xevenDescri" value="#{xesisVentanController.selected.xevenDescri}" title="#{bundle.EditXesisVentanTitle_xevenDescri}" required="true" requiredMessage="#{bundle.EditXesisVentanRequiredMessage_xevenDescri}"/>
+                        <p:outputLabel value="#{bundle.EditXesisVentanLabel_xevenMensaj}" for="xevenMensaj" />
+                        <p:inputText id="xevenMensaj" value="#{xesisVentanController.selected.xevenMensaj}" title="#{bundle.EditXesisVentanTitle_xevenMensaj}" required="true" requiredMessage="#{bundle.EditXesisVentanRequiredMessage_xevenMensaj}"/>
+                        <p:outputLabel value="#{bundle.EditXesisVentanLabel_xesisCodigo}" for="xesisCodigo" />
+                        <p:selectOneMenu id="xesisCodigo" value="#{xesisVentanController.selected.xesisCodigo}" required="true" requiredMessage="#{bundle.EditXesisVentanRequiredMessage_xesisCodigo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{xesisSisteController.itemsAvailableSelectOne}"
+                                           var="xesisCodigoItem"
+                                           itemValue="#{xesisCodigoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{xesisVentanController.update}" value="#{bundle.Save}" update="display,:XesisVentanListForm:datalist,:growl" oncomplete="handleSubmit(args, 'XesisVentanEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="XesisVentanEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

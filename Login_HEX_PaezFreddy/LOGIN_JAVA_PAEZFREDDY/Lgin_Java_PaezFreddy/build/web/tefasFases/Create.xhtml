@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TefasFasesCreateDlg" widgetVar="TefasFasesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTefasFasesTitle}">
+            <h:form id="TefasFasesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tefasFasesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTefasFasesLabel_codfase}" for="codfase" />
+                        <p:inputText id="codfase" value="#{tefasFasesController.selected.codfase}" title="#{bundle.CreateTefasFasesTitle_codfase}" required="true" requiredMessage="#{bundle.CreateTefasFasesRequiredMessage_codfase}"/>
+                        <p:outputLabel value="#{bundle.CreateTefasFasesLabel_numfase}" for="numfase" />
+                        <p:inputText id="numfase" value="#{tefasFasesController.selected.numfase}" title="#{bundle.CreateTefasFasesTitle_numfase}" required="true" requiredMessage="#{bundle.CreateTefasFasesRequiredMessage_numfase}"/>
+                        <p:outputLabel value="#{bundle.CreateTefasFasesLabel_duracion}" for="duracion" />
+                        <p:inputText id="duracion" value="#{tefasFasesController.selected.duracion}" title="#{bundle.CreateTefasFasesTitle_duracion}" required="true" requiredMessage="#{bundle.CreateTefasFasesRequiredMessage_duracion}"/>
+                        <p:outputLabel value="#{bundle.CreateTefasFasesLabel_fechainicio}" for="fechainicio" />
+                        <p:calendar id="fechainicio" pattern="MM/dd/yyyy" value="#{tefasFasesController.selected.fechainicio}" title="#{bundle.EditTefasFasesTitle_fechainicio}" required="true" requiredMessage="#{bundle.EditTefasFasesRequiredMessage_fechainicio}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateTefasFasesLabel_presupuesto}" for="presupuesto" />
+                        <p:inputText id="presupuesto" value="#{tefasFasesController.selected.presupuesto}" title="#{bundle.CreateTefasFasesTitle_presupuesto}" required="true" requiredMessage="#{bundle.CreateTefasFasesRequiredMessage_presupuesto}"/>
+                        <p:outputLabel value="#{bundle.CreateTefasFasesLabel_objetivo}" for="objetivo" />
+                        <p:inputText id="objetivo" value="#{tefasFasesController.selected.objetivo}" title="#{bundle.CreateTefasFasesTitle_objetivo}" required="true" requiredMessage="#{bundle.CreateTefasFasesRequiredMessage_objetivo}"/>
+                        <p:outputLabel value="#{bundle.CreateTefasFasesLabel_alcance}" for="alcance" />
+                        <p:inputText id="alcance" value="#{tefasFasesController.selected.alcance}" title="#{bundle.CreateTefasFasesTitle_alcance}" required="true" requiredMessage="#{bundle.CreateTefasFasesRequiredMessage_alcance}"/>
+                        <p:outputLabel value="#{bundle.CreateTefasFasesLabel_codproyec}" for="codproyec" />
+                        <p:selectOneMenu id="codproyec" value="#{tefasFasesController.selected.codproyec}" required="true" requiredMessage="#{bundle.EditTefasFasesRequiredMessage_codproyec}">
+                            <f:selectItems value="#{teproProyecController.itemsAvailableSelectOne}"
+                                           var="codproyecItem"
+                                           itemValue="#{codproyecItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tefasFasesController.create}" value="#{bundle.Save}" update="display,:TefasFasesListForm:datalist,:growl" oncomplete="handleSubmit(args,'TefasFasesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TefasFasesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

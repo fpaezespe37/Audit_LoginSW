@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="XeestEstadEditDlg" widgetVar="XeestEstadEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditXeestEstadTitle}">
+            <h:form id="XeestEstadEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{xeestEstadController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditXeestEstadLabel_xeestCodigo}" for="xeestCodigo" />
+                        <p:inputText id="xeestCodigo" value="#{xeestEstadController.selected.xeestCodigo}" title="#{bundle.EditXeestEstadTitle_xeestCodigo}" required="true" requiredMessage="#{bundle.EditXeestEstadRequiredMessage_xeestCodigo}"/>
+                        <p:outputLabel value="#{bundle.EditXeestEstadLabel_xeestDescri}" for="xeestDescri" />
+                        <p:inputText id="xeestDescri" value="#{xeestEstadController.selected.xeestDescri}" title="#{bundle.EditXeestEstadTitle_xeestDescri}" required="true" requiredMessage="#{bundle.EditXeestEstadRequiredMessage_xeestDescri}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{xeestEstadController.update}" value="#{bundle.Save}" update="display,:XeestEstadListForm:datalist,:growl" oncomplete="handleSubmit(args, 'XeestEstadEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="XeestEstadEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

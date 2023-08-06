@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TeparParticCreateDlg" widgetVar="TeparParticCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTeparParticTitle}">
+            <h:form id="TeparParticCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{teparParticController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTeparParticLabel_codproyec}" for="codproyec" />
+                        <p:inputText id="codproyec" value="#{teparParticController.selected.codproyec}" title="#{bundle.CreateTeparParticTitle_codproyec}" required="true" requiredMessage="#{bundle.CreateTeparParticRequiredMessage_codproyec}"/>
+                        <p:outputLabel value="#{bundle.CreateTeparParticLabel_horas}" for="horas" />
+                        <p:inputText id="horas" value="#{teparParticController.selected.horas}" title="#{bundle.CreateTeparParticTitle_horas}" required="true" requiredMessage="#{bundle.CreateTeparParticRequiredMessage_horas}"/>
+                        <p:outputLabel value="#{bundle.CreateTeparParticLabel_peempCurp}" for="peempCurp" />
+                        <p:selectOneMenu id="peempCurp" value="#{teparParticController.selected.peempCurp}" required="true" requiredMessage="#{bundle.EditTeparParticRequiredMessage_peempCurp}">
+                            <f:selectItems value="#{peempEmpleController.itemsAvailableSelectOne}"
+                                           var="peempCurpItem"
+                                           itemValue="#{peempCurpItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTeparParticLabel_teproProyec}" for="teproProyec" />
+                        <p:selectOneMenu id="teproProyec" value="#{teparParticController.selected.teproProyec}" required="true" requiredMessage="#{bundle.EditTeparParticRequiredMessage_teproProyec}">
+                            <f:selectItems value="#{teproProyecController.itemsAvailableSelectOne}"
+                                           var="teproProyecItem"
+                                           itemValue="#{teproProyecItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{teparParticController.create}" value="#{bundle.Save}" update="display,:TeparParticListForm:datalist,:growl" oncomplete="handleSubmit(args,'TeparParticCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TeparParticCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
